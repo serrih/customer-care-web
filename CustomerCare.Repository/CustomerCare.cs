@@ -2,8 +2,8 @@ namespace CustomerCare.Repository;
 
 public class CustomerCare 
 {
-    public void RegisterClient()
+    public Customer RegisterClient(int id, string name)
     {
- 
+        return new Customer(id, name);
     }
 }
