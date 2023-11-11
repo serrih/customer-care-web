@@ -4,13 +4,13 @@ namespace CustomerCare.Repository;
 
 public class CustomerCare 
 {
-    public IEnumerable GetQueues()
+    public short CalculateFasterQueue(IEnumerable<Customer> emptyQueue)
     {
-        return new List<Customer>();
+        return 1;
     }
 
     public Customer RegisterClient(int id, string name)
     {
-        return new Customer(id, name);
+        return new Customer(id, name, 1);
     }
 }
