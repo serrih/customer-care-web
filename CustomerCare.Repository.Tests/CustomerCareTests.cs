@@ -17,4 +17,17 @@ public class CustomerCareTests
         Assert.Equivalent(expectedCustomer, customer);
     }
 
+    [Fact]
+    public void GetQueues_Empty()
+    {
+        // Arrange
+        var customerCare = new CustomerCare();
+
+        // Act
+        var queue1 = customerCare.GetQueues();
+
+        // Assert
+        Assert.Empty(queue1);
+    }
+
 }
