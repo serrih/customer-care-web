@@ -22,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CustomerCare.Models\CustomerCare.Models.csproj" />
     <ProjectReference Include="..\QueuesDispatcherLibrary\QueuesDispatcherLibrary.csproj" />
   </ItemGroup>
 
