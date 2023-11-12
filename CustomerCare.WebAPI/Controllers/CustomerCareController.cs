@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CustomerCare.WebAPI.Data;
 using CustomerCare.WebAPI.Models;
+using QueuesDispatcherLibrary;
 
 namespace CustomerCare.WebAPI.Controllers;
 
@@ -25,9 +26,13 @@ public class CustomerCareController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult> Post(Customer customer)
+    public async Task<ActionResult> Post(int id, string name)
     {
-        _context.Customers.Add(customer);
+        var customers = _context.Customers;
+        var fasterQueueNumber = QueuesDispatcher.CalculateFasterQueue(GetCustomersByQueue(customers));
+        var customer = new Customer { Id = id, Name = name, Date = DateTime.Now, QueueNumber = fasterQueueNumber };
+
+        customers.Add(customer);
         await _context.SaveChangesAsync();
 
         return Ok();
@@ -46,4 +51,9 @@ public class CustomerCareController : ControllerBase
 
         return customer;
     }
+
+    private static IEnumerable<Tuple<short, int>> GetCustomersByQueue(IEnumerable<Customer> customers) => customers
+            .GroupBy(x => x.QueueNumber)
+            .Select(y => new Tuple<short, int>(y.First().QueueNumber, y.Count()))
+            .ToList();
 }
