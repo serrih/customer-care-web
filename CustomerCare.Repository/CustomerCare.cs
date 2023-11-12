@@ -1,26 +1,48 @@
+using CustomerCare.Models;
+using Microsoft.Data.Sqlite;
+
 namespace CustomerCare.Repository;
 
 public class CustomerCare 
 {
-    private const short attentionTimeQueue1 = 2;
-    private const short attentionTimeQueue2 = 3;
+    private const string connectionString = "Data Source=../../../../CustomerCare.Repository/CustomerCare.db";
 
-    public short CalculateFasterQueue(IEnumerable<Customer> customers)
+    public static void RegisterClient(int id, string name, short queueNumber)
     {
-        if (!customers.Any())
-            return 1;
+        using var connection = new SqliteConnection(connectionString);
+        
+        connection.Open();
 
-        var accumulatedMinutesInQueue1 = customers.Count(x => x.QueueNumber == 1) * attentionTimeQueue1;
-        var accumulatedMinutesInQueue2 = customers.Count(x => x.QueueNumber == 2) * attentionTimeQueue2;
+        var command = connection.CreateCommand();
+        command.CommandText = "INSERT INTO Customers (Id, Name, Queue_number) VALUES (@id, @name, @queueNumber)";
 
-        if (accumulatedMinutesInQueue1 <= accumulatedMinutesInQueue2)
-            return 1;
+        command.Parameters.AddWithValue("@id", id);
+        command.Parameters.AddWithValue("@name", name);
+        command.Parameters.AddWithValue("@queueNumber", queueNumber);
 
-        return 2;
+        command.ExecuteNonQuery(); 
     }
 
-    public Customer RegisterClient(int id, string name)
+    public static IEnumerable<Customer> GetCustomers()
     {
-        return new Customer(id, name, 1);
+        var customers = new List<Customer>();
+        using var connection = new SqliteConnection(connectionString);
+
+        connection.Open();
+
+        var command = connection.CreateCommand();
+        command.CommandText = "SELECT Id, Name, Queue_number FROM Customers";
+
+        using var reader = command.ExecuteReader();
+        while (reader.Read())
+        {
+            var id = reader.GetInt32(0);
+            var name = reader.GetString(1);
+            var queueNumber = reader.GetInt16(2);
+
+            customers.Add(new Customer(id, name, queueNumber));
+        }
+
+        return customers;
     }
 }

@@ -1,4 +1,4 @@
-namespace CustomerCare.Repository;
+namespace CustomerCare.Models;
 
 public class Customer
 {

@@ -1,9 +1,12 @@
-namespace CustomerCare.Repository.Tests;
+using CustomerCare.Models;
+using QueuesDispatcherLibrary;
 
-public class CustomerCareTests 
+namespace QueuesDispatcherLibrary.Tests;
+
+public class QueuesDispatcherTests
 {
 
-    private static CustomerCare customerCare = new CustomerCare();
+    private static QueuesDispatcher queuesDispatcher = new QueuesDispatcher();
 
     private static IEnumerable<Customer> emptyQueue = new List<Customer>();
     private static IEnumerable<Customer> oneCustomerQueue1 = new List<Customer>() { new Customer(1, "Peter", 1) };
@@ -26,26 +29,13 @@ public class CustomerCareTests
     };
 
     [Fact]
-    public void RegisterClient() 
-    {
-        // Arrange
-        var expectedCustomer = new Customer(1, "Pepe", 1);
-
-        // Act
-        var customer = customerCare.RegisterClient(1, "Pepe");
-
-        // Assert
-        Assert.Equivalent(expectedCustomer, customer);
-    }
-
-    [Fact]
     public void CalculateFasterQueue_AreEmptyQueues_ReturnsQueue1()
     {
         // Arrange
         var expectedQueueNumber = 1;
 
         // Act
-        var queueNumber = customerCare.CalculateFasterQueue(emptyQueue);
+        var queueNumber = queuesDispatcher.CalculateFasterQueue(emptyQueue);
 
         // Assert
         Assert.Equal(expectedQueueNumber, queueNumber);
@@ -58,7 +48,7 @@ public class CustomerCareTests
         var expectedQueueNumber = 2;
 
         // Act
-        var queueNumber = customerCare.CalculateFasterQueue(oneCustomerQueue1);
+        var queueNumber = queuesDispatcher.CalculateFasterQueue(oneCustomerQueue1);
 
         // Assert
         Assert.Equal(expectedQueueNumber, queueNumber);
@@ -71,7 +61,7 @@ public class CustomerCareTests
         var expectedQueueNumber = 1;
 
         // Act
-        var queueNumber = customerCare.CalculateFasterQueue(customersQueue2Longer);
+        var queueNumber = queuesDispatcher.CalculateFasterQueue(customersQueue2Longer);
 
         // Assert
         Assert.Equal(expectedQueueNumber, queueNumber);
@@ -84,7 +74,7 @@ public class CustomerCareTests
         var expectedQueueNumber = 2;
 
         // Act
-        var queueNumber = customerCare.CalculateFasterQueue(customersQueue1Longer);
+        var queueNumber = queuesDispatcher.CalculateFasterQueue(customersQueue1Longer);
 
         // Assert
         Assert.Equal(expectedQueueNumber, queueNumber);
