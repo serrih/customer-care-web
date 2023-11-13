@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueuesDispatcherLibrary", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerCare.WebAPI", "CustomerCare.WebAPI\CustomerCare.WebAPI.csproj", "{35A1DFFF-BDFC-4EE6-9E14-C3A49EC755ED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerCare.MVC", "CustomerCare.MVC\CustomerCare.MVC.csproj", "{F28D4181-67E7-46A7-AE1D-004377DE637B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{35A1DFFF-BDFC-4EE6-9E14-C3A49EC755ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35A1DFFF-BDFC-4EE6-9E14-C3A49EC755ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35A1DFFF-BDFC-4EE6-9E14-C3A49EC755ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F28D4181-67E7-46A7-AE1D-004377DE637B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F28D4181-67E7-46A7-AE1D-004377DE637B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F28D4181-67E7-46A7-AE1D-004377DE637B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F28D4181-67E7-46A7-AE1D-004377DE637B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
