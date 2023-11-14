@@ -13,6 +13,7 @@ public class HomeController : Controller
         _logger = logger;
     }
 
+    [HttpGet]
     public IActionResult Index()
     {
         return View();
@@ -22,15 +23,15 @@ public class HomeController : Controller
     public async Task<IActionResult> SaveCustomer(Customer customer)
     {
         if (!ModelState.IsValid)
-            return View("Index");
+            return View();
 
         using(var httpClient = new HttpClient())
         {
-            string url = "http://localhost:5005/CustomerCare.WebAPI/";            
-            var response = await httpClient.PostAsJsonAsync(url, customer);            
+            string url = "http://localhost:5148/CustomerCare?id={0}&name={1}";
+            var response = await httpClient.PostAsync(string.Format(url, customer.Id, customer.Name), null);
         }
 
-        return View("Index");
+        return View();
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
