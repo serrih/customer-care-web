@@ -5,11 +5,11 @@
 <div>
     @await Html.PartialAsync("_SaveCustomer")
     <br/>
-    <div class="card" style="width: 25rem;">
+    <div class="card" style="width: 70rem;">
         @await Component.InvokeAsync("CustomersQueue", new { queueNumber = 1})
     </div>
     <br/>
-    <div class="card" style="width: 25rem;">
+    <div class="card" style="width: 70rem;">
         @await Component.InvokeAsync("CustomersQueue", new { queueNumber = 2})
     </div>
 </div>
