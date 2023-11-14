@@ -1,50 +1,15 @@
-﻿@model CustomerCare.MVC.Models.Customer;
-
-@{
+﻿@{
     ViewData["Title"] = "Ticket de atención al cliente";
 }
 
 <div>
-    <form asp-action="SaveCustomer" asp-controller="Home" method="post">
-        <fieldset>
-            <legend>Ticket de atención al cliente</legend>
-            <div class="row g-3">
-                <div class="col-md-6">
-                   <label class="form-label">Id</label>
-                    <input asp-for="Id" type="number" class="form-control" value="0">
-                    <span asp-validation-for="Id" class="text-danger"></span>
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label">Nombre</label>
-                    <input asp-for="Name" type="text" class="form-control">
-                    <span asp-validation-for="Name" class="text-danger"></span>
-                </div>
-                <div class="col-12">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                </div>
-            </div>
-        </fieldset>
-    </form>
+    @await Html.PartialAsync("_SaveCustomer")
     <br/>
-    <div class="card" style="width: 18rem;">
-        <div class="card-header">
-            Cola 1
-        </div>
-        <ul class="list-group list-group-horizontal">
-            <li class="list-group-item">An item</li>
-            <li class="list-group-item">A second item</li>
-            <li class="list-group-item">A third item</li>
-        </ul>
+    <div class="card" style="width: 25rem;">
+        @await Component.InvokeAsync("CustomersQueue", new { queueNumber = 1})
     </div>
     <br/>
-    <div class="card" style="width: 18rem;">
-        <div class="card-header">
-            Cola 2
-        </div>
-        <ul class="list-group list-group-horizontal-sm">
-            <li class="list-group-item">An item</li>
-            <li class="list-group-item">A second item</li>
-            <li class="list-group-item">A third item</li>
-        </ul>
+    <div class="card" style="width: 25rem;">
+        @await Component.InvokeAsync("CustomersQueue", new { queueNumber = 2})
     </div>
 </div>

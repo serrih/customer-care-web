@@ -1,0 +1,11 @@
+@model Tuple<int, IEnumerable<CustomerCare.MVC.Models.Customer>>;
+
+<div class="card-header">
+    Cola @Model.Item1
+</div>
+<ul class="list-group list-group-horizontal">
+@foreach (var customer in Model.Item2)
+{
+    <li class="list-group-item">Id: @customer.Id <br/> Nombre: @customer.Name</li>
+}
+</ul>

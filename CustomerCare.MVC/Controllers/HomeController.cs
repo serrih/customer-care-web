@@ -23,7 +23,7 @@ public class HomeController : Controller
     public async Task<IActionResult> SaveCustomer(Customer customer)
     {
         if (!ModelState.IsValid)
-            return View();
+            return View("Index");
 
         using(var httpClient = new HttpClient())
         {
@@ -31,7 +31,7 @@ public class HomeController : Controller
             var response = await httpClient.PostAsync(string.Format(url, customer.Id, customer.Name), null);
         }
 
-        return View();
+        return View("Index");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
