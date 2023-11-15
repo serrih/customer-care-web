@@ -10,8 +10,8 @@ namespace CustomerCare.WebAPI.Controllers;
 [Route("[controller]")]
 public class CustomerCareController : ControllerBase
 {
-    private readonly ILogger<CustomerCareController> _logger;
     private readonly DataContext _context;
+    private readonly ILogger<CustomerCareController> _logger;
 
     public CustomerCareController(ILogger<CustomerCareController> logger, DataContext context)
     {
